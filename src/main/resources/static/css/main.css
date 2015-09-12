@@ -1,0 +1,47 @@
+body {
+    font-family: sans;
+    font-size: 1em;
+}
+
+div.error {
+    font-weight: bold;
+    color: red;
+}
+
+div.logout {
+    float: right;
+}
+
+div.loginPanel{
+	float:right;
+	padding: 0px 30px;
+}
+
+.floatLeft{
+	float:left;
+}
+
+label{
+	display: block;
+	padding: 10px 0 5px 0;
+}
+
+input[type=text], input[type=password] {
+	padding:5px;
+	border:1px solid #999;
+	width:180px;
+	margin:0 5px 0 0;
+	color:#444;
+}
+
+input[type=button], input[type=submit] {
+	padding:4px 10px;
+	color:#ddd;
+	background:#202b6b;
+	border:1px solid #1e2c69;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	margin:0 5px;
+	*padding:4px 0;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Thymeleafexamples - Spring security</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}" />
+    </head>
+    <body>
+        <div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">
+            Logged user: <span sec:authentication="name">Bob</span> |
+            Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span> |
+            <a href="index.html" th:href="@{/logout}">Logout</a>
+        </div>
+        <div th:fragmet="login" class="loginPanel" sec:authorize="!isAuthenticated()">
+        	<div th:if="${loginError}" class="error">Wrong user or password</div>
+        	<form th:action="@{/login}" method="post">
+        		<div class="floatLeft">
+		            <label for="username">Username</label>
+		            <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
+	            </div>
+	            <div class="floatLeft">
+		            <label for="password">Password</label>
+		            <input type="password" id="password" name="password" />
+		            <input type="submit" value="Log in" />
+	            </div>
+	        </form>
+        </div>
+        <h1>Thymeleafexamples - Spring security</h1>
+        <p>This is a demo of Thymeleaf and Spring-security integration.</p>
+        <h2>Private pages</h2>
+        <p>This is a public page, but you can navigate to protected pages to trigger authentication.</p>
+        <ul>
+            <li>Go to <a href="admin/index.html" th:href="@{/admin/index.html}">administration zone</a> (only admins)</li>
+            <li>Go to <a href="user/index.html" th:href="@{/user/index.html}">user zone</a> (only users)</li>
+            <li>Go to <a href="user/index.html" th:href="@{/shared/index.html}">shared zone</a> (both users and admins)</li>
+        </ul>
+        <h2>Exception handling</h2>
+        <ul>
+            <li>You can <a href="error.html" th:href="@{/simulateError.html}">simulate an exception</a> to see custom ErrorPage.</li>
+        </ul>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+		  This content is only shown to administrators.
+		</div>
+		<div sec:authorize="hasRole('ROLE_USER')">
+		  This content is only shown to users.
+		</div>
+		 <div sec:authentication="name">
+	        The value of the "name" property of the authentication object should appear here.
+	    </div>
+	    
+	    <div sec:authorize="hasRole('ROLE_USER')">
+	    	<a href="">My Plan</a>
+	    </div>
+	    
+	    <div sec:authorize="hasRole('ROLE_ADMIN')">
+			<a href="admin/foodManager.html" th:href="@{/admin/foodManager.html}">Food Manager</a>
+			<a href="admin/exerciseManager.html" th:href="@{/admin/exerciseManager.html}">Exercise Manager</a>
+		</div>
+    </body>
+</html>
